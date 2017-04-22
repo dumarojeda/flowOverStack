@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  c_duty_id: 1
+  c_duty_type: MyString
+
+two:
+  description: MyText
+  c_duty_id: 1
+  c_duty_type: MyString

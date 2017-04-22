@@ -1,0 +1,28 @@
+<div class="container">
+<h1>Questions</h1>
+<div class="row">
+<div class="col-sm-12">
+  <table class="mytable">
+    <tbody>
+      <% @questions.each do |question| %>
+        <tr>
+          <td>
+            <div class="votes"><%= pluralize(question.votes.size, 'vote') %></div>
+          </td>     <td>
+            <div class="votes"><%= pluralize(question.answers.size, 'vote') %></div>
+          </td>
+          <td>
+            <div class="name">
+              <h4><span><%= question.name %></span></h4>
+              <p>Asked <%= question.user.email %> ago</p>
+            </div>
+          </td>
+          <td class="date">
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>

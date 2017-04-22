@@ -1,0 +1,35 @@
+// Place all the styles related to the questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+  .votes {
+    color: #5CA4A9;
+    font-size: 18px;
+    margin: 5px;
+    padding: 5px;
+    max-width: 50px;
+    text-align: center;
+  }
+
+  .name{
+    font-size: 16px;
+    margin-left: 15px;
+  }
+
+  .name span {
+    color: #ED6A5A;
+  }
+  p{
+    margin: 0;
+  }
+
+  .mytable {
+    width: 70%;
+    margin: 0px auto;
+    float: none;
+}
+
+td {
+    border-top: 1px solid lightgray; 
+  }

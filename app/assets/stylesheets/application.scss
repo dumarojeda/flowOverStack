@@ -1,0 +1,33 @@
+
+@import "bootstrap-sprockets";
+
+$gray-darker:           #E6EBE0;
+$gray:                  #3D4245;
+$gray-light:            #99a0a2;   
+
+$brand-primary:         #5D576B;
+$btn-primary-color:     #ccc;
+
+$body-bg:               $gray-darker;
+$text-color:            $gray-light;
+
+$font-family-sans-serif:  "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-size-base:          16px;
+
+$input-bg:              $gray;
+$input-color:           $gray-light;
+$input-border:          $gray;
+
+$table-border-color:    $gray;
+
+$navbar-height:                            60px;
+$navbar-inverse-color:                     #c2c6c9;
+$navbar-inverse-bg:                        $brand-primary;
+
+$navbar-inverse-link-active-color:         #ccc;
+$navbar-inverse-link-active-bg:            $body-bg;
+
+@import "bootstrap";
+@import "questions";
+
+.navbar-inverse { border: 0; }

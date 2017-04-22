@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 1
+  v_duty_id: 1
+  v_duty_type: MyString
+  belongs_to: 
+
+two:
+  quantity: 1
+  v_duty_id: 1
+  v_duty_type: MyString
+  belongs_to: 
