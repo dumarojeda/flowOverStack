@@ -1,0 +1,14 @@
+<h2>New Question</h2>
+<div class="well">
+  <%= form_for @question do |f| %>
+    <h3>
+     <%= f.text_field(:name, placeholder: "Title", class: "text-field") %> 
+    </h3>
+    <div>
+      <%= md_simple_editor  do %>
+        <%= f.text_area(:description, cols: 60, rows: 3)  %>
+      <% end %> 
+    </div>
+    <div><%= f.submit "Create Question", class: "btn btn-primary" %></div>
+  <% end %>
+</div>

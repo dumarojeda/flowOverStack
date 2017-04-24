@@ -1,0 +1,72 @@
+
+<div class="container">
+  
+  <div class="row">
+    <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
+        <div class="center">
+          <%= link_to '#' do %>
+              <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
+          <% end %>
+          <span><%= @question.votes.size  %></span>
+          <%= link_to "#" do %>
+            <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
+          <% end %>
+        </div>
+    </div>
+    <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">
+      <h3 class="turquesa"><%= @question.name  %></h3>
+      <p>
+        <%= render :html => raw(@markdown.render(@question.description)) %>
+      </p>
+      <p class="asked">Asked: <%= @question.user.email %> ago</p>
+    </div>
+  </div>
+  
+  <!-- Answers -->
+    <h4 class="turquesa"><%= pluralize(@question.answers.size, 'Answer') %></h4>
+      <ul>
+        <% @question.answers.each do |answer| %>
+          <li class="answer row">
+            <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
+              <div class="center">
+                <%= link_to '#' do %>
+                    <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
+                <% end %>
+                <span><%= @question.votes.size  %></span>
+                <%= link_to "#" do %>
+                  <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">            
+              <%= render :html => raw(@markdown.render(answer.description)) %>
+              <p class="asked">Answered: <%= answer.user.email %> ago</p>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+  
+
+  <div class="row">
+    <% if user_signed_in? %>
+      <h4 class="turquesa">Enter your answer</h4>
+      <button id="create-answer" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Create Answer
+      </button>
+      <div class="collapse" id="collapseExample">
+        <div class="well">
+          <%= form_for [@question, @question.answers.new] do |f| %>
+            <div>
+              <%= md_simple_editor  do %>
+                <%= f.text_area(:description, cols: 60, rows: 3)  %>
+              <% end %>
+            </div> 
+            <div><%= f.submit "Send Answer", class: "btn btn-primary" %></div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+    
+  </div>

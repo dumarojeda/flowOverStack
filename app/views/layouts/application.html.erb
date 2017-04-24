@@ -19,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><strong>FlowOverStack</strong></a>
+          <a class="navbar-brand" href="<%= questions_path  %>"><strong><span class="flow">Flow</span><span class="over">Over</span><span class="stack">Stack</span></strong></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -28,11 +28,42 @@
             <!-- <li class="active"><a href="#">Gastos<span class="sr-only">(current)</span></a></li> -->
             <% if user_signed_in? %>
               <li> <%= link_to("Salir", destroy_user_session_path, method: :delete) %></li>
+              <li> <%= link_to("Questions", questions_path) %></li>
+            <% else %>
+              <li> <%= link_to("Login", new_user_session_path, method: :get) %></li>
             <% end %>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+
+<div id="wrap">
+  <div id="main" class="container clear-top">
+    <!-- <p>Your content here</p> -->
     <%= yield %>
-  </body>
+  </div>
+</div>
+    
+    <!-- <footer> -->
+<!--       <div class="navbar navbar-inverse">
+
+      </div> -->
+<!--       <footer>
+        <p class="float-right"><a href="#">Back to top</a></p>
+        <p>© 2017 Company, Inc. · <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+      </footer> -->
+    <!-- </footer> -->
+
+<footer class="footer">
+<nav class="navbar navbar-inverse">
+  <div class="container ">
+    <div class='center'>
+      <p><span class="glyphicon glyphicon-leaf" aria-hidden="true"></span></p>
+      <p>© 2017 Meli, Inc. </p>
+    </div>
+  </div>
+</nav>
+</footer>
+  
+</body>
 </html>

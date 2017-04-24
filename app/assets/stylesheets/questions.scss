@@ -3,12 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.flow {
+  color: #5CA4A9;
+}
+
+.over {
+  color: #F4F1BB;
+}
+
+.stack {
+  color: #ED6A5A;
+}
+
   .votes {
     color: #5CA4A9;
     font-size: 18px;
     margin: 5px;
     padding: 5px;
-    max-width: 50px;
+    max-width: 60px;
     text-align: center;
   }
 
@@ -17,7 +29,7 @@
     margin-left: 15px;
   }
 
-  .name span {
+  .name .title {
     color: #ED6A5A;
   }
   p{
@@ -33,3 +45,79 @@
 td {
     border-top: 1px solid lightgray; 
   }
+
+.text-field {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.search-form{
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+footer .navbar{
+  margin: 0;
+  border-radius: 0,
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+h3 {
+  padding: 0;
+  margin: 0;
+}
+
+html, body {
+  height: 90%;
+}
+
+#wrap {
+  min-height: 90%;
+}
+
+#main {
+  overflow:auto;
+  padding-bottom:450px; /* this needs to be bigger than footer height*/
+}
+
+.footer {
+  position: relative;
+  margin-top: -100px; /* negative value of footer height */
+  height: 80px;
+  clear:both;
+  padding-top:20px;
+} 
+
+li {
+  list-style: none;
+}
+
+.answer {
+  margin: 8px;
+  padding: 5px;
+  border-bottom: 1px solid #D2D6CC;
+}
+
+.turquesa {
+  color: #5CA4A9;
+}
+
+.btn-primary, .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  color: white;
+  background-color: #5CA4A9;
+  border: none;
+}
+
+.asked{
+  font-size: 14px;
+  font-style: italic;
+}

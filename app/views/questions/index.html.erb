@@ -1,20 +1,31 @@
 <div class="container">
-<h1>Questions</h1>
-<div class="row">
-<div class="col-sm-12">
+<div class="row search-form">
+  <div class="col-lg-7">
+    <!-- <div class='search-form'> -->
+    <h3>Test if your question already exists...</h3>
+    <%= form_tag(questions_path,  {:method => :get}) do %>
+      <%= text_field_tag(:question, params[:question], placeholder: "Search...", class: 'text-field') %>
+    <% end %>
+  </div>
+  <div class="col-lg-5">
+    <%= link_to "Create your Question", new_question_path, class: 'btn btn-primary'%>
+  </div>
+    <!-- </div> -->
+</div>
   <table class="mytable">
     <tbody>
       <% @questions.each do |question| %>
         <tr>
           <td>
-            <div class="votes"><%= pluralize(question.votes.size, 'vote') %></div>
-          </td>     <td>
-            <div class="votes"><%= pluralize(question.answers.size, 'vote') %></div>
+            <div class="votes"><%= pluralize(question.votes.size, 'Vote') %></div>
+          </td>
+          <td>
+            <div class="votes"><%= pluralize(question.answers.size, 'Answer') %></div>
           </td>
           <td>
             <div class="name">
-              <h4><span><%= question.name %></span></h4>
-              <p>Asked <%= question.user.email %> ago</p>
+              <h4><span><%= link_to question.name, question_path(question), class: 'title' %></span></h4>
+              <p class="asked">Asked <%= question.user.email %> ago</p>
             </div>
           </td>
           <td class="date">
@@ -23,6 +34,6 @@
       <% end %>
     </tbody>
   </table>
-  </div>
-</div>
+
+
 </div>

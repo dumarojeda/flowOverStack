@@ -13,4 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require md_simple_editor
+//= require bootstrap-sprockets
 //= require_tree .
+
+// $( document ).ready(function() {
+//   $("#create-answer").on("click", showForm)
+// });
+
+// function showForm(e){
+//   console.log("en boton")
+//   $(".collapse").show()
+// }
