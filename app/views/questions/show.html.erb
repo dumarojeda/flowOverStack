@@ -3,35 +3,7 @@
   <!-- Question -->
   <div class="row">
     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
-        <% if user_signed_in? %>
-            <% if @question.votes.pluck(:user_id).include?(current_user.id)  %>
-              <div class="center">
-                <span class="glyphicon glyphicon-chevron-up stack"  aria-hidden="true"></span>
-                <span><%= @question.votes.size  %></span>
-                <%= link_to question_vote_path(@question, @question.votes), method: :delete do %>
-                  <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
-                <% end %>
-              </div>
-            <% else %>
-              <div class="center">
-                <%= link_to question_votes_path(@question), method: :post do %>
-                  <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
-                <% end  %>
-                <span><%= @question.votes.size  %></span>
-                <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
-              </div>
-            <% end %>
-        <% else %>
-          <div class="center">
-            <%= link_to new_user_session_path, method: :get do %>
-              <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
-            <% end %>
-            <span><%= @question.votes.size  %></span>
-            <%= link_to new_user_session_path, method: :get do %>
-              <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
-            <% end %>
-          </div>
-        <% end %>
+      <%= render :partial => "votesQA", :locals => {:delete_vote => question_vote_path(@question, @question.votes), :create_vote => question_votes_path(@question), :qa => @question} %>
     </div>
     <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">
       <h3 class="turquesa"><%= @question.name  %></h3>
@@ -45,29 +17,22 @@
   <!-- Answers -->
     <h4 class="turquesa"><%= pluralize(@question.answers.size, 'Answer') %></h4>
       <ul>
-        <% @question.answers.each do |answer| %>
-          <li class="answer row">
+        <% @answers = @question.answers %>
+        <li class="answer row">
+          <% @question.answers.each do |answer| %>
             <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
-              <div class="center">
-                <%= link_to '#' do %>
-                    <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
-                <% end %>
-                <span><%= answer.votes.size  %></span>
-                <%= link_to "#" do %>
-                  <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
-                <% end %>
-              </div>
+            <%= render :partial => "votesQA", :locals => {:delete_vote => answer_vote_path(answer, answer.votes), :create_vote => answer_votes_path(answer), :qa => answer}  %>
             </div>
-
             <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">            
               <%= render :html => raw(@markdown.render(answer.description)) %>
               <p class="asked">Answered: <%= answer.user.email %> ago</p>
             </div>
-          </li>
-        <% end %>
+          <% end %>
+        </li>
+          
       </ul>
   
-
+  <!-- Create your answer -->
   <div class="row">
     <% if user_signed_in? %>
       <h4 class="turquesa">Enter your answer</h4>

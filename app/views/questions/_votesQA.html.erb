@@ -1,18 +1,18 @@
 <% if user_signed_in? %>
-    <% if @question.votes.pluck(:user_id).include?(current_user.id)  %>
+    <% if qa.votes.pluck(:user_id).include?(current_user.id)  %>
       <div class="center">
         <span class="glyphicon glyphicon-chevron-up stack"  aria-hidden="true"></span>
-        <span><%= @question.votes.size  %></span>
-        <%= link_to question_vote_path(@question, @question.votes), method: :delete do %>
+        <span><%= qa.votes.size  %></span>
+        <%= link_to delete_vote, method: :delete do %>
           <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
         <% end %>
       </div>
     <% else %>
       <div class="center">
-        <%= link_to question_votes_path(@question), method: :post do %>
+        <%= link_to create_vote, method: :post do %>
           <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
         <% end  %>
-        <span><%= @question.votes.size  %></span>
+        <span><%= qa.votes.size  %></span>
         <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
       </div>
     <% end %>
@@ -21,9 +21,11 @@
     <%= link_to new_user_session_path, method: :get do %>
       <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
     <% end %>
-    <span><%= @question.votes.size  %></span>
+    <span><%= qa.votes.size  %></span>
     <%= link_to new_user_session_path, method: :get do %>
       <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
     <% end %>
   </div>
 <% end %>
+
+
