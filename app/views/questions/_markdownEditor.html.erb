@@ -1,18 +1,19 @@
+  <!-- type: answer / comment -->
   <div class="row">
     <% if user_signed_in? %>
-      <h4 class="turquesa">Enter your answer</h4>
-      <button id="create-answer" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Create Answer
+      <!-- <h4 class="turquesa">Enter your <%= type %></h4> -->
+      <button id="create-answer" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse<%= type %>" aria-expanded="false" aria-controls="collapse<%= type %>">
+        Create <%= type_name %>
       </button>
-      <div class="collapse" id="collapseExample">
+      <div class="collapse" id="collapse<%= type %>">
         <div class="well">
-          <%= form_for [@question, @question.answers.new] do |f| %>
+          <%= form_for [type_obj, type_obj_new] do |f| %>
             <div>
               <%= md_simple_editor  do %>
                 <%= f.text_area(:description, cols: 60, rows: 3)  %>
               <% end %>
             </div> 
-            <div><%= f.submit "Send Answer", class: "btn btn-primary" %></div>
+            <div><%= f.submit "Send  #{type_name} ", class: "btn btn-primary" %></div>
           <% end %>
         </div>
       </div>

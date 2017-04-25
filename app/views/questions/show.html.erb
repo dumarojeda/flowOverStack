@@ -11,47 +11,56 @@
         <%= render :html => raw(@markdown.render(@question.description)) %>
       </p>
       <p class="asked">Asked: <%= @question.user.email %> ago</p>
+      <div class="container">
+        <p>
+          <% if @question.comments.any?   %>
+            <% @question.comments.each do |comment| %>
+              <p><%= render :html => raw(@markdown.render(comment.description)) %></p>
+              <p class="asked">Commented: <%= comment.user.email %> ago</p>
+            <% end %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+    <div>
+      <%= render :partial => "markdownEditor", :locals => {:type_name => "Comment", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new } %>
     </div>
   </div>
   
   <!-- Answers -->
     <h4 class="turquesa"><%= pluralize(@question.answers.size, 'Answer') %></h4>
       <ul>
-        <% @answers = @question.answers %>
-        <li class="answer row">
+        
           <% @question.answers.each do |answer| %>
+          <li class="answer row">
             <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
             <%= render :partial => "votesQA", :locals => {:delete_vote => answer_vote_path(answer, answer.votes), :create_vote => answer_votes_path(answer), :qa => answer}  %>
             </div>
             <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">            
-              <%= render :html => raw(@markdown.render(answer.description)) %>
+              <p><%= render :html => raw(@markdown.render(answer.description)) %></p>
               <p class="asked">Answered: <%= answer.user.email %> ago</p>
+            <div>
+            <div class="container">
+                <% if answer.comments.any?   %>
+                  <% answer.comments.each do |comment| %>
+                    <p><%= render :html => raw(@markdown.render(comment.description)) %></p>
+                    <p class="asked"> Commented: <%= comment.user.email %> ago</p>
+                  <% end %>
+                <% end %>
             </div>
+                  
+            </div>
+            <div>
+              <%= render :partial => "markdownEditor", :locals => {:type_name => "Comment", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new } %>
+            </div>
+            
+          </li>
           <% end %>
-        </li>
+        
           
       </ul>
   
   <!-- Create your answer -->
-  <div class="row">
-    <% if user_signed_in? %>
-      <h4 class="turquesa">Enter your answer</h4>
-      <button id="create-answer" class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Create Answer
-      </button>
-      <div class="collapse" id="collapseExample">
-        <div class="well">
-          <%= form_for [@question, @question.answers.new] do |f| %>
-            <div>
-              <%= md_simple_editor  do %>
-                <%= f.text_area(:description, cols: 60, rows: 3)  %>
-              <% end %>
-            </div> 
-            <div><%= f.submit "Send Answer", class: "btn btn-primary" %></div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-    
+  <h4 class="turquesa">Enter your Answer</h4>
+      <%= render :partial => "markdownEditor", :locals => {:type_name => "Answer", :type => "Answer", :type_obj => @question, :type_obj_new => @question.answers.new } %>
   </div>
