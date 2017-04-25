@@ -4,17 +4,7 @@ class AnswersController < ApplicationController
   end
 
   def create
-    puts "p"*70
-    
-    puts "esta es la sesion #{current_user.id}"
     @answer = Answer.create(answer_params)
-    # if @answer.save
-    #   puts "p"*70  
-    #   redirect_to question_path(params[:question_id])
-      
-    # else
-    
-    # end
     redirect_to question_path(params[:question_id])
   end
 

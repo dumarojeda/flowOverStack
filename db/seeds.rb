@@ -21,15 +21,15 @@ end
 answers_ids = Answer.all.pluck(:id)
 
 
-6.times do |vote|
-  newVote = Vote.new(quantity: rand(10))
-  newVote.update_attribute(:v_duty, Question.find(questions_ids.sample))
-  newVote.save
-end
+# 6.times do |vote|
+#   newVote = Vote.new(quantity: rand(10))
+#   newVote.update_attribute(:v_duty, Question.find(questions_ids.sample))
+#   newVote.save
+# end
 
 
-6.times do |vote|
-  newVote = Vote.new(quantity: rand(10))
-  newVote.update_attribute(:v_duty, Answer.find(answers_ids.sample))
-  newVote.save
-end
+# 6.times do |vote|
+#   newVote = Vote.new(quantity: rand(10))
+#   newVote.update_attribute(:v_duty, Answer.find(answers_ids.sample))
+#   newVote.save
+# end

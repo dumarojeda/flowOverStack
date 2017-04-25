@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170422172555) do
+ActiveRecord::Schema.define(version: 20170424174157) do
 
   create_table "answers", force: :cascade do |t|
     t.text     "description"
@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 20170422172555) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer  "quantity"
     t.integer  "v_duty_id"
     t.string   "v_duty_type"
     t.integer  "user_id"

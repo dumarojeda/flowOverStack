@@ -1,17 +1,37 @@
 
 <div class="container">
-  
+  <!-- Question -->
   <div class="row">
     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
-        <div class="center">
-          <%= link_to '#' do %>
+        <% if user_signed_in? %>
+            <% if @question.votes.pluck(:user_id).include?(current_user.id)  %>
+              <div class="center">
+                <span class="glyphicon glyphicon-chevron-up stack"  aria-hidden="true"></span>
+                <span><%= @question.votes.size  %></span>
+                <%= link_to question_vote_path(@question, @question.votes), method: :delete do %>
+                  <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
+                <% end %>
+              </div>
+            <% else %>
+              <div class="center">
+                <%= link_to question_votes_path(@question), method: :post do %>
+                  <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
+                <% end  %>
+                <span><%= @question.votes.size  %></span>
+                <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
+              </div>
+            <% end %>
+        <% else %>
+          <div class="center">
+            <%= link_to new_user_session_path, method: :get do %>
               <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
-          <% end %>
-          <span><%= @question.votes.size  %></span>
-          <%= link_to "#" do %>
-            <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
-          <% end %>
-        </div>
+            <% end %>
+            <span><%= @question.votes.size  %></span>
+            <%= link_to new_user_session_path, method: :get do %>
+              <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
+            <% end %>
+          </div>
+        <% end %>
     </div>
     <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">
       <h3 class="turquesa"><%= @question.name  %></h3>
@@ -32,7 +52,7 @@
                 <%= link_to '#' do %>
                     <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
                 <% end %>
-                <span><%= @question.votes.size  %></span>
+                <span><%= answer.votes.size  %></span>
                 <%= link_to "#" do %>
                   <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
                 <% end %>
