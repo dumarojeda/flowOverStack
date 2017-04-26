@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
-   require 'redcarpet/render_strip'
+  
+  before_action :set_markdowm, only: [:create]
+
   def new
   end
 
@@ -19,7 +21,6 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @question
     else
-      puts "no crea comment answer"*30
       render "questions/show"
     end
   end

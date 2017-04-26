@@ -8,7 +8,7 @@
     <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">
       <h3 class="turquesa"><%= @question.name  %></h3>
       <p>
-        <%= render :html => raw(@markdown.render(@question.description)) %>
+         <%= render :html => raw(@markdown.render(@question.description)) %>
       </p>
       <p class="asked">Asked: <%= @question.user.email %> ago</p>
       <div class="container">
@@ -21,10 +21,28 @@
           <% end %>
         </p>
       </div>
-    </div>
+    
     <div>
     <!-- Crear un comentario a la question -->
-      <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "CommentQ", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new } %>
+      <% if @comment && @comment.c_duty_type == "Question" %>
+        <% if @comment.errors.any? %>    
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@comment.errors.count, "error") %> 
+              prohibited this comment from being saved:
+            </h2>
+            <ul>
+              <% @comment.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="container">
+        <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "CommentQ", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new } %>
+      </div>
+    </div>
     </div>
   </div>
   
@@ -41,7 +59,6 @@
             <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">            
               <p><%= render :html => raw(@markdown.render(answer.description)) %></p>
               <p class="asked">Answered: <%= answer.user.email %> ago</p>
-              
               <div>
                 <!-- Muestra los comentarios de las answers -->
                 <div class="container">
@@ -55,21 +72,23 @@
               </div>
             <!-- Boton para crear comentario a una answer  -->
             <div>
-            <% if @comment %>
-              <% if @comment.errors.any? %>    
-                <div id="error_explanation">
-                  <h2>
-                    <%= pluralize(@comment.errors.count, "error") %> 
-                    prohibited this comment from being saved:
-                  </h2>
-                  <ul>
-                    <% @comment.errors.full_messages.each do |msg| %>
-                      <li><%= msg %></li>
-                    <% end %>
-                  </ul>
-                </div>
+              <% if @comment && @comment.c_duty_type == "Answer" %>
+                <% if @answer.id == answer.id %>
+                  <% if @comment.errors.any? %>    
+                    <div id="error_explanation">
+                      <h2>
+                        <%= pluralize(@comment.errors.count, "error") %> 
+                        prohibited this comment from being saved:
+                      </h2>
+                      <ul>
+                        <% @comment.errors.full_messages.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                      </ul>
+                    </div>
+                  <% end %>
+                <% end %>
               <% end %>
-            <% end %>
             <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "CommentA", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new } %>
             </div>
           </li>
