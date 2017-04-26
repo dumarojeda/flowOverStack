@@ -15,7 +15,7 @@ users_ids = User.all.pluck(:id)
 end
 questions_ids = Question.all.pluck(:id)
 
-5.times do |answer|
+10.times do |answer|
   Answer.create(description: Faker::HarryPotter.quote, question_id: questions_ids.sample, user_id: users_ids.sample)
 end
 answers_ids = Answer.all.pluck(:id)
