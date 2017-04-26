@@ -24,7 +24,7 @@
     </div>
     <div>
     <!-- Crear un comentario a la question -->
-      <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new } %>
+      <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "CommentQ", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new } %>
     </div>
   </div>
   
@@ -33,6 +33,7 @@
       <ul>        
         <!-- Muestra todas las answers asociadas a una question  -->
         <% @question.answers.each do |answer| %>
+          <!-- <div class="row"> -->
           <li class="answer row">
             <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
             <%= render :partial => "questions/votesQA", :locals => {:delete_vote => answer_vote_path(answer, answer.votes), :create_vote => answer_votes_path(answer), :qa => answer}  %>
@@ -40,25 +41,40 @@
             <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">            
               <p><%= render :html => raw(@markdown.render(answer.description)) %></p>
               <p class="asked">Answered: <%= answer.user.email %> ago</p>
-            <div>
-
-            <!-- Muestra los comentarios de las answers -->
-            <div class="container">
-                <% if answer.comments.any?   %>
-                  <% answer.comments.each do |comment| %>
-                    <p><%= render :html => raw(@markdown.render(comment.description)) %></p>
-                    <p class="asked"> Commented: <%= comment.user.email %> ago</p>
-                  <% end %>
-                <% end %>
-            </div>
-
+              
+              <div>
+                <!-- Muestra los comentarios de las answers -->
+                <div class="container">
+                    <% if answer.comments.any?   %>
+                      <% answer.comments.each do |comment| %>
+                        <div><%= render :html => raw(@markdown.render(comment.description)) %></div>
+                        <p class="asked"> Commented: <%= comment.user.email %> ago</p>
+                      <% end %>
+                    <% end %>
+                </div>
+              </div>
             <!-- Boton para crear comentario a una answer  -->
-            </div>
             <div>
-              <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new } %>
+            <% if @comment %>
+              <% if @comment.errors.any? %>    
+                <div id="error_explanation">
+                  <h2>
+                    <%= pluralize(@comment.errors.count, "error") %> 
+                    prohibited this comment from being saved:
+                  </h2>
+                  <ul>
+                    <% @comment.errors.full_messages.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              <% end %>
+            <% end %>
+            <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "CommentA", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new } %>
             </div>
           </li>
-          <% end %>
+          <!-- </div> -->
+        <% end %>
       </ul>
   
   <!-- Create your answer -->
