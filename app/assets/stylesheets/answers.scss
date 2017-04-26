@@ -1,3 +1,23 @@
 // Place all the styles related to the answers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.answer, .comment {
+  margin: 8px;
+  padding: 5px;
+  border-top: 1px solid #D2D6CC;
+}
+
+.comment {
+  font-size: 13px;
+}
+
+.asked{
+  font-size: 13px;
+  font-style: italic;
+}
+
+.gray{
+  color: gray
+}

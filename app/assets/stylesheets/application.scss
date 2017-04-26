@@ -31,5 +31,22 @@ $navbar-inverse-link-active-bg:            $body-bg;
 
 @import "bootstrap";
 @import "questions";
+@import "answers";
 
 .navbar-inverse { border: 0; }
+
+.navbar-nav li, .navbar .navbar-header a{
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 20px;
+  padding: 15px 10px;
+  color: #F4F1BB;
+
+  
+}
+
+.navbar-inverse .navbar-nav > li > a {
+  color: #5CA4A9;
+}

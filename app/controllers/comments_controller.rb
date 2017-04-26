@@ -1,19 +1,17 @@
 class CommentsController < ApplicationController
   
-  before_action :set_markdowm, only: [:create]
+  before_action :set_markdowm, only: [:create, :new]
 
   def new
   end
 
   def create
     if params.has_key?(:answer_id)
-      puts "crea coment answer"*30
       @answer = Answer.find(params[:answer_id])
       @question_id = @answer.question.id
       @question = Question.find(@question_id)
       @comment = @answer.comments.new(comment_params)
     else
-      puts "comment question"*30
       @question_id = params[:question_id]
       @question = Question.find(@question_id)
       @comment = @question.comments.new(comment_params)
@@ -21,6 +19,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to @question
     else
+      @comment.created_at = Time.now
       render "questions/show"
     end
   end

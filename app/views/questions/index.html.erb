@@ -25,7 +25,7 @@
           <td>
             <div class="name">
               <h4><span><%= link_to question.name, question_path(question), class: 'title' %></span></h4>
-              <p class="asked">Asked <%= question.user.email %> ago</p>
+              <p class="asked">Asked <%= question.user.email %> <%= time_ago_in_words(question.created_at)%> ago</p>
             </div>
           </td>
           <td class="date">

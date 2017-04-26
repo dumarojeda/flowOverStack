@@ -7,19 +7,20 @@
     </div>
     <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">
       <h3 class="turquesa"><%= @question.name  %></h3>
-      <p>
+      <div class="gray">
          <%= render :html => raw(@markdown.render(@question.description)) %>
-      </p>
-      <p class="asked">Asked: <%= @question.user.email %> ago</p>
+         <p class="asked"> Asked: <%= @question.user.email %> <%= time_ago_in_words(@question.created_at) %> ago</p>
+      </div>
       <div class="container">
-        <p>
-          <% if @question.comments.any?   %>
+          <% if @question.comments.any? %>
             <% @question.comments.each do |comment| %>
-              <p><%= render :html => raw(@markdown.render(comment.description)) %></p>
-              <p class="asked">Commented: <%= comment.user.email %> ago</p>
+              <div class="comment">
+                <%= render :html => raw(@markdown.render(comment.description)) %>
+                <p class="asked"> Commented: <%= comment.user.email %> <%= time_ago_in_words(comment.created_at) %> ago </p>
+              </div>
+      
             <% end %>
           <% end %>
-        </p>
       </div>
     
     <div>
@@ -40,7 +41,7 @@
         <% end %>
       <% end %>
       <div class="container">
-        <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "CommentQ", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new } %>
+        <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment for this question", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new, :link => "link"} %>
       </div>
     </div>
     </div>
@@ -57,15 +58,19 @@
             <%= render :partial => "questions/votesQA", :locals => {:delete_vote => answer_vote_path(answer, answer.votes), :create_vote => answer_votes_path(answer), :qa => answer}  %>
             </div>
             <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">            
-              <p><%= render :html => raw(@markdown.render(answer.description)) %></p>
-              <p class="asked">Answered: <%= answer.user.email %> ago</p>
+              <div class="gray">
+                <%= render :html => raw(@markdown.render(answer.description)) %>
+                <p class="asked">Answered: <%= answer.user.email %> <%= time_ago_in_words(answer.created_at)%> ago</p>
+              </div>
               <div>
                 <!-- Muestra los comentarios de las answers -->
                 <div class="container">
                     <% if answer.comments.any?   %>
                       <% answer.comments.each do |comment| %>
-                        <div><%= render :html => raw(@markdown.render(comment.description)) %></div>
-                        <p class="asked"> Commented: <%= comment.user.email %> ago</p>
+                        <div class="comment">
+                          <%= render :html => raw(@markdown.render(comment.description)) %>
+                          <p class="asked"> Commented: <%= comment.user.email %> <%= time_ago_in_words(comment.created_at)%> ago</p>
+                        </div>
                       <% end %>
                     <% end %>
                 </div>
@@ -89,7 +94,7 @@
                   <% end %>
                 <% end %>
               <% end %>
-            <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "CommentA", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new } %>
+            <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new, :link => "link" } %>
             </div>
           </li>
           <!-- </div> -->
@@ -114,5 +119,5 @@
           </div>
         <% end %>
       <% end %>
-      <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Answer", :type => "Answer", :type_obj => @question, :type_obj_new => @question.answers.new } %>
+      <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Answer", :type => "Answer", :type_obj => @question, :type_obj_new => @question.answers.new, :link => "btn-lg big-button" } %>
   </div>
