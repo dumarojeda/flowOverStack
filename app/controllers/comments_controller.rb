@@ -8,6 +8,7 @@ class CommentsController < ApplicationController
       @answer = Answer.find(params[:answer_id])
       question_id = @answer.question.id
       create_comment(@answer, question_id)
+      @question = Question.find(question_id)
     else
       question_id = params[:question_id]
       @question = Question.find(question_id)
@@ -22,14 +23,17 @@ class CommentsController < ApplicationController
   end
 
   def create_comment(comment_type, question_id)
-      validate_user_comment(comment_type)
-      redirect_to question_path(question_id)
-      
+    validate_comment(comment_type)
+    redirect_to question_path(question_id)
   end
 
-  def validate_user_comment(comment_type)
+  def validate_comment(comment_type)
     @comment = Comment.new(comment_params)
-    @comment.update_attribute(:c_duty, comment_type)
+    if @comment.save
+      @comment.update_attribute(:c_duty, comment_type)
+    else
+      render "questions/show"
+    end
   end
 
 end

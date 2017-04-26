@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to question_path(@question.id)
     else
+      render 'new'
     end
   end
 
@@ -35,9 +36,7 @@ class QuestionsController < ApplicationController
 
   private
 
-  def set_markdowm
-    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, no_styles: true)
-  end
+
 
   def question_params
     params.require(:question).permit(:name, :description).merge(user_id: current_user.id)

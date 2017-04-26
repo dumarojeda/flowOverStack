@@ -3,7 +3,7 @@
   <!-- Question -->
   <div class="row">
     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
-      <%= render :partial => "votesQA", :locals => {:delete_vote => question_vote_path(@question, @question.votes), :create_vote => question_votes_path(@question), :qa => @question} %>
+      <%= render :partial => "questions/votesQA", :locals => {:delete_vote => question_vote_path(@question, @question.votes), :create_vote => question_votes_path(@question), :qa => @question} %>
     </div>
     <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">
       <h3 class="turquesa"><%= @question.name  %></h3>
@@ -23,23 +23,26 @@
       </div>
     </div>
     <div>
-      <%= render :partial => "markdownEditor", :locals => {:type_name => "Comment", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new } %>
+    <!-- Crear un comentario a la question -->
+      <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new } %>
     </div>
   </div>
   
   <!-- Answers -->
     <h4 class="turquesa"><%= pluralize(@question.answers.size, 'Answer') %></h4>
-      <ul>
-        
-          <% @question.answers.each do |answer| %>
+      <ul>        
+        <!-- Muestra todas las answers asociadas a una question  -->
+        <% @question.answers.each do |answer| %>
           <li class="answer row">
             <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
-            <%= render :partial => "votesQA", :locals => {:delete_vote => answer_vote_path(answer, answer.votes), :create_vote => answer_votes_path(answer), :qa => answer}  %>
+            <%= render :partial => "questions/votesQA", :locals => {:delete_vote => answer_vote_path(answer, answer.votes), :create_vote => answer_votes_path(answer), :qa => answer}  %>
             </div>
             <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">            
               <p><%= render :html => raw(@markdown.render(answer.description)) %></p>
               <p class="asked">Answered: <%= answer.user.email %> ago</p>
             <div>
+
+            <!-- Muestra los comentarios de las answers -->
             <div class="container">
                 <% if answer.comments.any?   %>
                   <% answer.comments.each do |comment| %>
@@ -48,19 +51,33 @@
                   <% end %>
                 <% end %>
             </div>
-                  
+
+            <!-- Boton para crear comentario a una answer  -->
             </div>
             <div>
-              <%= render :partial => "markdownEditor", :locals => {:type_name => "Comment", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new } %>
+              <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new } %>
             </div>
-            
           </li>
           <% end %>
-        
-          
       </ul>
   
   <!-- Create your answer -->
   <h4 class="turquesa">Enter your Answer</h4>
-      <%= render :partial => "markdownEditor", :locals => {:type_name => "Answer", :type => "Answer", :type_obj => @question, :type_obj_new => @question.answers.new } %>
+  <!-- validacion al crear answer -->
+      <% if @answer %>
+        <% if @answer.errors.any? %>    
+          <div id="error_explanation">
+            <h2>
+              <%= pluralize(@answer.errors.count, "error") %> 
+              prohibited this answer from being saved:
+            </h2>
+            <ul>
+              <% @answer.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
+      <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Answer", :type => "Answer", :type_obj => @question, :type_obj_new => @question.answers.new } %>
   </div>

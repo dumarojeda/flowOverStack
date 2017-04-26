@@ -4,4 +4,5 @@ class Question < ApplicationRecord
   has_many :comments, as: :c_duty
   has_many :votes, as: :v_duty
   
+  validates :name, :description, presence: true
 end
