@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.all
     if params[:question].present?
-      @questions = @questions.where("name OR description LIKE ?", "%#{params[:question]}%")
+      @questions = @questions.where("description LIKE ? OR name LIKE ?", "%"+params[:question]+"%", "%"+params[:question]+"%")
     end
   end
 
