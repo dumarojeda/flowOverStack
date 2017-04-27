@@ -27,7 +27,7 @@ class QuestionsController < ApplicationController
     @questions = Question.all
     if params[:question].present?
       search = params[:question]
-      @questions = @questions.where("description LIKE ? OR name LIKE ?", "%#{search}%", "%#{search}%")
+      @questions = @questions.where("description ILIKE ? OR name ILIKE ?", "%#{search}%", "%#{search}%")
     end
   end
 
