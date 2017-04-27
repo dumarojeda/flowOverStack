@@ -1,24 +1,19 @@
-# README
+# FlowOverStack
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## URL
+Puedes ver la aplicación [aqui](https://finalflowoverstack.herokuapp.com/)
 
-Things you may want to cover:
+## App Preview
+![App Preview](./public/appPreview.jpg?raw=true "FlowOverStack App Preview")
 
-* Ruby version
+## Resumen
+Este proyecto es un clon de [StackOverFlow](https://es.stackoverflow.com/) un sitio muy popular de preguntas y respuestas de programación.
 
-* System dependencies
+## Casos de uso
+Este proyecto es realizado para el Bootcamp Full Stack Web Developer de  [MakeItReal](https://www.makeitreal.camp/) con los siguientes casos de uso:
+![Casos de Uso](./public/flowoverstack-use-cases.jpg?raw=true "User Cases")
 
-* Configuration
+## Modelos y asociaciones
+El modelo para Votes y Comments se realiza usando asociaciones polimorficas
+![App Preview](./public/schema.jpg?raw=true "FlowOverStack App Preview")
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
