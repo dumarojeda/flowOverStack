@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   # before_action :authenticate_user!
   # require 'redcarpet'
-  require 'redcarpet/render_strip'
+
   
   before_action :set_markdowm, only: [:show, :create, :new]
 
@@ -35,10 +35,21 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
   end
 
+  def edit
+    @question = Question.find(params[:id])
+    render :edit
+  end
+
+  def update
+  end
+
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    redirect_to questions_path
+  end
+
   private
-
-
-
   def question_params
     params.require(:question).permit(:name, :description).merge(user_id: current_user.id)
   end
