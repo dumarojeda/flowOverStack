@@ -80,15 +80,6 @@ html, body {
   height: 90%;
 }
 
-#wrap {
-  min-height: 90%;
-}
-
-#main {
-  overflow:auto;
-  padding-bottom:450px; /* this needs to be bigger than footer height*/
-}
-
 .footer {
   position: relative;
   margin-top: -100px; /* negative value of footer height */
@@ -156,10 +147,21 @@ border: none;
 
   }
 
+  .icon-t {
+  background-color: transparent;
+  border: none;
+  color: #5CA4A9;
+
+  }
+
 .action{
   display: inline-flex;
 }
 
 .alinear-icons {
   display: inline-flex;
+}
+
+.answer-icons{
+ display: block;
 }

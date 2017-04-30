@@ -47,6 +47,25 @@ $navbar-inverse-link-active-bg:            $body-bg;
   
 }
 
+
+#wrap {
+  min-height: 50%;
+
+}
+
+#main {
+  overflow:auto;
+  padding-bottom:300px; /* this needs to be bigger than footer height*/
+  width: 100%
+}
+
+
 .navbar-inverse .navbar-nav > li > a {
   color: #5CA4A9;
+}
+
+footer .navbar.navbar-inverse{
+	width: 100%;
+	position: absolute;
+	margin: 0;
 }
