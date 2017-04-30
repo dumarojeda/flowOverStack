@@ -5,13 +5,13 @@ Rails.application.routes.draw do
   root 'questions#index'
   
   resources :questions do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy, :edit, :update]
     resources :answers
     resources :votes, only: [:create, :destroy]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :answers do
-    resources :comments, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy, :edit, :update]
     resources :votes, only: [:create, :destroy]
   end
 

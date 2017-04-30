@@ -7,16 +7,45 @@
     </div>
     <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">
       <h3 class="turquesa"><%= @question.name  %></h3>
-      <div class="gray">
-         <%= render :html => raw(@markdown.render(@question.description)) %>
-         <p class="asked"> Asked: <%= @question.user.email %> <%= time_ago_in_words(@question.created_at) %> ago</p>
+      <div class="question gray">
+        <%= render :html => raw(@markdown.render(@question.description)) %>
+        <p class="asked"> Asked: <%= @question.user.email %> <%= time_ago_in_words(@question.created_at) %> ago
+         <% if user_signed_in? %>
+          <% if current_user.id == @question.user_id %>
+            <%= form_tag(question_path(@question.id), method: :delete, data: { confirm: 'Are you sure you want to delete this question?' }) do%>
+              <%= button_tag( class: "btn icon pull-right") do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <% end %>          
+            <% end %>
+            <%= link_to edit_question_path(@question.id), class: "btn icon pull-right" do  %>
+              <span class="glyphicon glyphicon-pencil"></span>
+            <% end %>
+          <% end %>
+        <% end %>
+        </p>
       </div>
+      
       <div class="container">
           <% if @question.comments.any? %>
             <% @question.comments.each do |comment| %>
               <div class="comment">
                 <%= render :html => raw(@markdown.render(comment.description)) %>
-                <p class="asked"> Commented: <%= comment.user.email %> <%= time_ago_in_words(comment.created_at) %> ago </p>
+                <p class="asked"> Commented: <%= comment.user.email %> <%= time_ago_in_words(comment.created_at) %> ago 
+                <div class="alinear-icons">
+                <% if user_signed_in? %>
+                  <% if current_user.id == comment.user_id %>
+                    <%= form_tag(question_comment_path(@question.id, comment.id), method: :delete, data: { confirm: 'Are you sure you want to delete this question?' }) do%>
+                      <%= button_tag( class: "btn icon") do %>
+                        <span class="glyphicon glyphicon-trash"></span>
+                      <% end %>          
+                    <% end %>
+                    <%= link_to edit_question_comment_path(@question.id, comment.id), class: "btn icon" do  %>
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                </div>
+                </p>
               </div>
       
             <% end %>
