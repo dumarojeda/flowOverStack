@@ -16,9 +16,7 @@
         <div class="well">
           <%= form_for [type_obj, type_obj_new] do |f| %>
             <div>
-              <%= md_simple_editor :class => "big-button important!" do %>
-                <%= f.text_area(:description, cols: 60, rows: 3)  %>
-              <% end %>
+              <%= f.text_area(:description, cols: 60, rows: 3)  %>
             </div> 
             <div><%= f.submit "Send  #{type_name} ", class: "btn btn-primary big-button" %></div>
           <% end %>
