@@ -13,8 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
-//= require md_simple_editor
 //= require bootstrap-sprockets
+//= require md_simple_editor
 //= require_tree .
 
 // $( document ).ready(function() {

@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   # require 'redcarpet'
 
   
-  before_action :set_markdowm, only: [:show, :create, :new]
+  before_action :set_markdowm, only: [:show, :create, :new, :edit]
 
   def new
     if user_signed_in?

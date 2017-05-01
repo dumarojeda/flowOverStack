@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   
-  before_action :set_markdowm, only: [:create, :new]
+  before_action :set_markdowm, only: [:create, :new, :edit, :show]
 
   def new
   end

@@ -13,13 +13,35 @@
           <% clase = "otra" %>
       <% end %>
       <div class="<%= clase %>" id="<%= clase  %><%= type %>">
-        <div class="well">
-          <%= form_for [type_obj, type_obj_new] do |f| %>
-            <div>
-              <%= f.text_area(:description, cols: 60, rows: 3)  %>
+        <div>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#editor<%= type %>1" aria-controls="editor<%= type %>1" role="tab" data-toggle="tab">Editor</a>
+          </li>
+          <li role="presentation">
+            <a href="#preview<%= type %>2" aria-controls="preview<%= type %>2" role="tab" data-toggle="tab">Preview</a>
+          </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="editor<%= type %>1">
+            <div class="well">
+              <%= form_for [type_obj, type_obj_new] do |f| %>
+                <div>
+                  <%= f.text_area(:description, cols: 60, rows: 3)  %>
+                </div> 
+                <div><%= f.submit "Send  #{type_name} ", class: "btn btn-primary big-button" %></div>
+              <% end %>
             </div> 
-            <div><%= f.submit "Send  #{type_name} ", class: "btn btn-primary big-button" %></div>
-          <% end %>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="preview<%= type %>2">
+            <div class="well">
+            <h1>hola</h1>
+              <%= render :html => raw(@markdown.render("qui va el preview")) %>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     <% end %>

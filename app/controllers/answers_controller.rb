@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   require 'redcarpet/render_strip'
-  before_action :set_markdowm, only: [:create]
+  before_action :set_markdowm, only: [:create, :show, :edit, :new]
 
   
   def new
