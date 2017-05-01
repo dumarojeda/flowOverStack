@@ -25,9 +25,34 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    if params.has_key?(:answer_id)
+      @answer = Answer.find(params[:answer_id])
+      @question_id = @answer.question.id
+      @question = Question.find(@question_id)
+      @comment = @answer.comments.find(params[:id])
+
+      render :edit
+    else
+      @question_id = params[:question_id]
+      @question = Question.find(@question_id)
+      @comment = @question.comments.find(params[:id])
+      render :edit
+    end
   end
 
   def update
+    if params.has_key?(:answer_id)
+      @answer = Answer.find(params[:answer_id])
+      @question_id = @answer.question.id
+      @question = Question.find(@question_id)
+      @comment = @answer.comments.update(comment_params)
+      redirect_to question_path(@question_id)
+    else
+      @question_id = params[:question_id]
+      @question = Question.find(@question_id)
+      @comment = @question.comments.update(comment_params)
+      redirect_to question_path(@question_id)
+    end
   end
 
   def destroy

@@ -1,0 +1,6 @@
+
+<% if @answer %>
+  <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "edit", :type_obj => @answer, :type_obj_new => @comment, :link => "btn-lg big-button" } %>
+<% else %>
+  <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "edit", :type_obj => @question, :type_obj_new => @comment, :link => "btn-lg big-button" } %>
+<% end %>

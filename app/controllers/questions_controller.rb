@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
   end
 
   def index
-    @questions = Question.all
+    @questions = Question.order(id: :desc)
     if params[:question].present?
       search = params[:question]
       @questions = @questions.where("description ILIKE ? OR name ILIKE ?", "%#{search}%", "%#{search}%")
