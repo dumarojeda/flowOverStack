@@ -24,6 +24,9 @@ class AnswersController < ApplicationController
   end
 
   def update
+    @answer = Answer.find(params[:id])
+    @answer.update(answer_params)
+    redirect_to question_path(params[:question_id])
   end
 
   def destroy
