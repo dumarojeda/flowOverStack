@@ -2,12 +2,17 @@
   <div class="row">
     <% if user_signed_in? %>
       <!-- <h4 class="turquesa">Enter your <%= type %></h4> -->
-      <div>
-      <button id="create-answer" class="btn btn-primary <%= link  %>" type="button" data-toggle="collapse" data-target="#collapse<%= type %>" aria-expanded="false" aria-controls="collapse<%= type %>">
-        Create <%= type_name %>
-      </button>
-      </div>
-      <div class="collapse" id="collapse<%= type %>">
+      <% if type != "edit" %>
+        <% clase = "collapse" %>
+        <div>
+          <button id="create-answer" class="btn btn-primary <%= link  %>" type="button" data-toggle="collapse" data-target="#collapse<%= type %>" aria-expanded="false" aria-controls="collapse<%= type %>">
+            Create <%= type_name %>
+          </button>
+        </div>
+        <% else %>
+        <% clase = "otra" %>
+      <% end %>
+      <div class="<%= clase %>" id="<%= clase  %><%= type %>">
         <div class="well">
           <%= form_for [type_obj, type_obj_new] do |f| %>
             <div>
