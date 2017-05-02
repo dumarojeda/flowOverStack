@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   # before_action :authenticate_user!
   # require 'redcarpet'
+  require 'uri'
 
   
   before_action :set_markdowm, only: [:show, :create, :new, :edit]
@@ -21,6 +22,12 @@ class QuestionsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def preview
+    val = URI.escape(params[:description])
+    puts "*"*60
+    puts val
   end
 
   def index

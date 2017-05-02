@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'comments/new'
+  get '/questions/preview', to: 'questions#preview'
 
   devise_for :users
   root 'questions#index'

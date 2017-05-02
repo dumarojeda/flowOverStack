@@ -33,7 +33,7 @@
                <%= f.text_field(:name, class: "text-field") %> 
               </h3>
               <div>
-                <%= f.text_area(:description, cols: 60, rows: 3)  %>
+                <%= f.text_area(:description, cols: 60, rows: 3, id: "en-form")  %>
               </div>
             <div>
               <p>This text editor supports markdown</p>
@@ -46,8 +46,10 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="preview">
           <div class="well">
-          <h1>hola</h1>
-            <%= render :html => raw(@markdown.render("qui va el preview")) %>
+          <p id="text-preview">
+            <%= render :html => raw(@markdown.render("aqui va")) %>
+            <%= link_to "Preview", questions_preview_path, id: "send-preview" %>
+          </p>
           </div>
         </div>
       </div>

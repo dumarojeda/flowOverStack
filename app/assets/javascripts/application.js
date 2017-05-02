@@ -17,11 +17,33 @@
 //= require md_simple_editor
 //= require_tree .
 
-// $( document ).ready(function() {
-//   $("#create-answer").on("click", showForm)
-// });
+$( document ).ready(function() {
+  $("#send-preview").on("click", markdownEditor)
+ });
 
-// function showForm(e){
-//   console.log("en boton")
-//   $(".collapse").show()
-// }
+function markdownEditor(e){
+  e.preventDefault()
+  console.log("en markdownEditor")
+  $text = $("#en-form").val()
+  
+  var url = this.action
+  var data = $text
+  //$("#text-preview").text($text)
+  $.ajax({
+    url: url,
+    method: "GET",
+    data: encodeURI(data)
+  }).done("HECHO").fail()
+}
+
+function sendText(text){
+  event.preventDefault()
+  var url = this.action
+  var data = $(this).serialize()
+  $("input[type='text']").val("")
+  $.ajax({
+    url: url,
+    method: "POST",
+    data: encodeURI(data)
+  }).done(render).fail()
+}
