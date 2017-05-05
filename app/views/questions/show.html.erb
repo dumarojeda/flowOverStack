@@ -70,7 +70,7 @@
         <% end %>
       <% end %>
       <div class="container">
-        <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment for this question", :type => "new#{@question.id}", :type_obj => @question, :type_obj_new => @question.comments.new, :link => "link"} %>
+        <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment for this question", :type => "#{@question.comments.count +1}", :type_obj => @question, :type_obj_new => @question.comments.new, :link => "link"} %>
       </div>
     </div>
     </div>

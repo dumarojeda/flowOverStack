@@ -1,0 +1,2 @@
+$("#title-preview").html('<%= escape_javascript(render :html => raw(@markdown.render(@title))) %>')
+$("#text-preview").html('<%= escape_javascript(render :html => raw(@markdown.render(@description))) %>')

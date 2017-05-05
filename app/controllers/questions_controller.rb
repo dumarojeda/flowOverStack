@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   require 'uri'
 
   
-  before_action :set_markdowm, only: [:show, :create, :new, :edit]
+  before_action :set_markdowm, only: [:show, :create, :new, :edit, :preview]
 
   def new
     if user_signed_in?
@@ -25,9 +25,25 @@ class QuestionsController < ApplicationController
   end
 
   def preview
-    val = URI.escape(params[:description])
-    puts "*"*60
-    puts val
+    if params[:name].present?
+      @title = params[:name]
+    else
+      puts " en else title"*40
+      @title = ''
+    end
+
+    if params[:description].present?
+      @description = params[:description]
+    else
+      puts " en else description"*30
+      @description = ''
+    end
+  
+
+    respond_to do |format|
+      #format.html
+      format.js
+    end
   end
 
   def index
