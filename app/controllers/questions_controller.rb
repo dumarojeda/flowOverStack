@@ -25,6 +25,7 @@ class QuestionsController < ApplicationController
   end
 
   def preview
+    @typeEntry = params[:typeEntry]
     if params[:name].present?
       @title = params[:name]
     else
@@ -38,7 +39,7 @@ class QuestionsController < ApplicationController
       puts " en else description"*30
       @description = ''
     end
-  
+    
 
     respond_to do |format|
       #format.html

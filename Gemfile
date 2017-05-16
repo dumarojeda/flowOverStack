@@ -38,7 +38,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'devise'
 gem 'faker'
-gem 'md_simple_editor'
 gem 'redcarpet'
 
 group :development, :test do
