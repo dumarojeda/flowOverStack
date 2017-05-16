@@ -3,6 +3,9 @@ $( document ).ready(function() {
 
  });
 
+$(document).on('turbolinks:load', function() {
+  bindEvents()
+})
 function bindEvents(){
   $("#qs-preview").off("click");
   $("#qs-editor").off("click");
