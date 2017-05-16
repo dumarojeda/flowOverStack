@@ -10,7 +10,7 @@
 
 
 6.times do
-  User.create(email: Faker::Internet.email, password: '123456')
+  User.create(email: Faker::Internet.email, password: '123456789')
 end
 
 users_ids = User.all.pluck(:id)
