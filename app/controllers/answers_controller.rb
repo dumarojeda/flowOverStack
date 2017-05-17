@@ -9,10 +9,13 @@ class AnswersController < ApplicationController
 
   def create
     @answer = Answer.new(answer_params)
+    @question = Question.find(params[:question_id])
     if @answer.save
-      redirect_to question_path(params[:question_id])
+      #redirect_to question_path(params[:question_id])
+      respond_to do |format|
+        format.js
+      end
     else
-      @question = Question.find(params[:question_id])
       render "questions/show"
     end
   end

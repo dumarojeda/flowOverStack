@@ -29,18 +29,14 @@ class QuestionsController < ApplicationController
     if params[:name].present?
       @title = params[:name]
     else
-      puts " en else title"*40
       @title = ''
     end
 
     if params[:description].present?
       @description = params[:description]
     else
-      puts " en else description"*30
       @description = ''
     end
-    
-
     respond_to do |format|
       #format.html
       format.js

@@ -27,7 +27,7 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="editor<%= type %>">
             <div class="well">
-              <%= form_for [type_obj, type_obj_new] do |f| %>
+              <%= form_for [type_obj, type_obj_new], :remote => true do |f| %>
                 <div>
                   <%= f.text_area(:description, cols: 60, rows: 3, id: "#{letter}-form")  %>
                 </div> 

@@ -78,85 +78,10 @@
   
   <!-- Answers -->
     <h4 class="turquesa"><%= pluralize(@question.answers.size, 'Answer') %></h4>
-      <ul>        
+      <ul class="answers-list">        
         <!-- Muestra todas las answers asociadas a una question  -->
         <% @question.answers.each do |answer| %>
-          <!-- <div class="row"> -->
-          <li class="answer row">
-            <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
-            <%= render :partial => "questions/votesQA", :locals => {:delete_vote => answer_vote_path(answer, answer.votes), :create_vote => answer_votes_path(answer), :qa => answer}  %>
-            </div>
-            <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">            
-              <div class="gray">
-                <%= render :html => raw(@markdown.render(answer.description)) %>
-                <p class="asked">Answered: <%= answer.user.email %> <%= time_ago_in_words(answer.created_at)%> ago
-                <div class="answer-icons">
-                <% if user_signed_in? %>
-                  <% if current_user.id == answer.user_id %>
-                    <%= form_tag(question_answer_path(@question.id, answer.id), method: :delete, data: { confirm: 'Are you sure you want to delete this question?' }) do%>
-                      <%= button_tag( class: "btn icon-t pull-right") do %>
-                        <span class="glyphicon glyphicon-trash"></span>
-                      <% end %>          
-                    <% end %>
-                    <%= link_to edit_question_answer_path(@question.id, answer.id), class: "btn icon-t pull-right" do  %>
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    <% end %>
-                  <% end %>
-                <% end %>
-                </div>
-                </p>
-              </div>
-              <div>
-                <!-- Muestra los comentarios de las answers -->
-                <div class="container">
-                    <% if answer.comments.any?   %>
-                      <% answer.comments.each do |comment| %>
-                        <div class="comment">
-                          <%= render :html => raw(@markdown.render(comment.description)) %>
-                          <p class="asked"> Commented: <%= comment.user.email %> <%= time_ago_in_words(comment.created_at)%> ago
-                          <div class="alinear-icons">
-                            <% if user_signed_in? %>
-                              <% if current_user.id == comment.user_id %>
-                                <%= form_tag(answer_comment_path(answer.id, comment.id), method: :delete, data: { confirm: 'Are you sure you want to delete this question?' }) do%>
-                                  <%= button_tag( class: "btn icon") do %>
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                  <% end %>          
-                                <% end %>
-                                <%= link_to edit_answer_comment_path(answer.id, comment.id), class: "btn icon" do  %>
-                                  <span class="glyphicon glyphicon-pencil"></span>
-                                <% end %>
-                              <% end %>
-                            <% end %>
-                            </div>
-                          </p>
-                        </div>
-                      <% end %>
-                    <% end %>
-                </div>
-              </div>
-            <!-- Boton para crear comentario a una answer  -->
-            <div>
-              <% if @comment && @comment.c_duty_type == "Answer" %>
-                <% if @answer.id == answer.id %>
-                  <% if @comment.errors.any? %>    
-                    <div id="error_explanation">
-                      <h2>
-                        <%= pluralize(@comment.errors.count, "error") %> 
-                        prohibited this comment from being saved:
-                      </h2>
-                      <ul>
-                        <% @comment.errors.full_messages.each do |msg| %>
-                          <li><%= msg %></li>
-                        <% end %>
-                      </ul>
-                    </div>
-                  <% end %>
-                <% end %>
-              <% end %>
-            <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new, :link => "link", :letter => "ca" } %>
-            </div>
-          </li>
-          <!-- </div> -->
+          <%= render :partial => "answers/answerShow", :locals => {:answer => answer}%>
         <% end %>
       </ul>
   
