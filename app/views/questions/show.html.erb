@@ -54,21 +54,6 @@
     
     <div>
     <!-- Crear un comentario a la question -->
-      <% if @comment && @comment.c_duty_type == "Question" %>
-        <% if @comment.errors.any? %>    
-          <div id="error_explanation">
-            <h2>
-              <%= pluralize(@comment.errors.count, "error") %> 
-              prohibited this comment from being saved:
-            </h2>
-            <ul>
-              <% @comment.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-      <% end %>
       <div class="container">
         <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment for this question", :type => "#{@question.comments.count +1}", :type_obj => @question, :type_obj_new => @question.comments.new, :link => "link", :letter =>"cq"} %>
       </div>
@@ -87,7 +72,6 @@
   
   <!-- Create your answer -->
   <h4 class="turquesa">Enter your Answer</h4>
-  <!-- validacion al crear answer -->
 
       <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Answer", :type => "Answer", :type_obj => @question, :type_obj_new => @question.answers.new, :link => "btn-lg big-button", :letter => "an" } %>
   </div>

@@ -20,7 +20,12 @@ class CommentsController < ApplicationController
       redirect_to @question
     else
       @comment.created_at = Time.now
-      render "questions/show"
+      @typeEntry = session[:passed_variable]
+      @entry = @comment
+      respond_to do |format|
+        format.js {render 'answers/errors.js.erb'}
+      end
+      # render "questions/show"
     end
   end
 
