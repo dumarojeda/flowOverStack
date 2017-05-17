@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'comments/new'
   get '/questions/preview', to: 'questions#preview'
-  get '/answers/typeEntry', to: 'questions#typeEntry'
+  get '/answers/typeEntry', to: 'answers#typeEntry'
 
   devise_for :users
   root 'questions#index'

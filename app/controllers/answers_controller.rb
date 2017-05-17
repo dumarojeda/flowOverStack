@@ -16,10 +16,17 @@ class AnswersController < ApplicationController
         format.js
       end
     else
+      @typeEntry = session[:passed_variable] 
+      @entry = @answer
       respond_to do |format|
         format.js {render 'errors.js.erb'}
       end
     end
+  end
+
+  def typeEntry
+    @typeEntry = params[:typeEntry]
+    session[:passed_variable] = @typeEntry
   end
 
   def edit 
