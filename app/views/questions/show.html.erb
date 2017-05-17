@@ -88,20 +88,6 @@
   <!-- Create your answer -->
   <h4 class="turquesa">Enter your Answer</h4>
   <!-- validacion al crear answer -->
-      <% if @answer %>
-        <% if @answer.errors.any? %>    
-          <div id="error_explanation">
-            <h2>
-              <%= pluralize(@answer.errors.count, "error") %> 
-              prohibited this answer from being saved:
-            </h2>
-            <ul>
-              <% @answer.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-      <% end %>
+
       <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Answer", :type => "Answer", :type_obj => @question, :type_obj_new => @question.answers.new, :link => "btn-lg big-button", :letter => "an" } %>
   </div>
