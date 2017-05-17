@@ -20,7 +20,11 @@ class QuestionsController < ApplicationController
     if @question.save
       redirect_to question_path(@question.id)
     else
-      render 'new'
+      @typeEntry = 'qs'
+      @entry = @question
+      respond_to do |format|
+        format.js {render 'answers/errors.js.erb'}
+      end
     end
   end
 
