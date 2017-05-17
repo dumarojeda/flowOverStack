@@ -25,7 +25,8 @@
         </p>
       </div>
       
-      <div class="container">
+      <ul class="comments-questions">
+        <div class="container">
           <% if @question.comments.any? %>
             <% @question.comments.each do |comment| %>
               <div class="comment">
@@ -50,7 +51,8 @@
       
             <% end %>
           <% end %>
-      </div>
+        </div>
+      </ul>
     
     <div>
     <!-- Crear un comentario a la question -->

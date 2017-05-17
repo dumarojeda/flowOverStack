@@ -12,25 +12,25 @@ function bindEvents(){
   // an = tipo escribir answer
   // ca = tipo escribir comentario a un answer
   // cq = tipo escribir comentario a una question
-  $("#qs-preview").off("click");
-  $("#qs-editor").off("click");
-  $("#qs-preview").on("click", previewEditor);
-  $("#qs-editor").on("click", showEditor);
+  $(".qs-preview").off("click");
+  $(".qs-editor").off("click");
+  $(".qs-preview").on("click", previewEditor);
+  $(".qs-editor").on("click", showEditor);
 
-  $("#an-preview").off("click");
-  $("#an-editor").off("click");
-  $("#an-preview").on("click", previewEditor);
-  $("#an-editor").on("click", showEditor);
+  $(".an-preview").off("click");
+  $(".an-editor").off("click");
+  $(".an-preview").on("click", previewEditor);
+  $(".an-editor").on("click", showEditor);
 
-  $("#ca-preview").off("click");
-  $("#ca-editor").off("click");
-  $("#ca-preview").on("click", previewEditor);
-  $("#ca-editor").on("click", showEditor);
+  $(".ca-preview").off("click");
+  $(".ca-editor").off("click");
+  $(".ca-preview").on("click", previewEditor);
+  $(".ca-editor").on("click", showEditor);
 
-  $("#cq-preview").off("click");
-  $("#cq-editor").off("click");
-  $("#cq-preview").on("click", previewEditor);
-  $("#cq-editor").on("click", showEditor);
+  $(".cq-preview").off("click");
+  $(".cq-editor").off("click");
+  $(".cq-preview").on("click", previewEditor);
+  $(".cq-editor").on("click", showEditor);
 
   // Eventos para crear un nuevo comentario, pregunta o respuesta
   $("#an-create").off("click");
@@ -51,23 +51,22 @@ function showEditor(e){
   e.preventDefault()
   $(this).tab('show')
   console.log("en showEditor")
-  bindEvents();
   console.log(this)
   $(this).parent().addClass("active")
   $(this).next().removeClass("active")
+  bindEvents();
 }
 
 function previewEditor(typeEntry){
   event.preventDefault()
-  console.log(this)
   $(this).tab('show')
   $(this).parent().addClass("active")
   $(this).next().removeClass("active")
 
   console.log(typeEntry)
-  var typeEntry = this.id.split("-")[0]
-  console.log("en previewEditor")
-  var data = $("#"+typeEntry+"-form").val()
+  var typeEntry = this.className.split("-")[0]
+  console.log("en previewEditor data:")
+  var data = $("."+typeEntry+"-form").val()
   console.log(data)
   var title = $("#question_name").val()
   // console.log

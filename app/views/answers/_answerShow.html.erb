@@ -26,7 +26,9 @@
     <div>
       <!-- Muestra los comentarios de las answers -->
       <div class="container">
+        <ul class="answer-<%= answer.id %>">
           <% if answer.comments.any?   %>
+          
             <% answer.comments.each do |comment| %>
               <div class="comment">
                 <%= render :html => raw(@markdown.render(comment.description)) %>
@@ -48,7 +50,9 @@
                 </p>
               </div>
             <% end %>
+          
           <% end %>
+        </ul>
       </div>
     </div>
   <!-- Boton para crear comentario a una answer  -->

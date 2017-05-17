@@ -4,10 +4,10 @@
   <%= form_for @question, remote: true, class: "comment-form" do |f| %>
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active">
-        <a href="#editor" aria-controls="editor" role="tab" data-toggle="tab" id="qs-editor">Editor</a>
+        <a href="#editor" aria-controls="editor" role="tab" data-toggle="tab" class="qs-editor">Editor</a>
       </li>
       <li>
-        <a href="#preview" aria-controls="preview" role="tab" data-toggle="tab" id="qs-preview">Preview</a>
+        <a href="#preview" aria-controls="preview" role="tab" data-toggle="tab" class="qs-preview">Preview</a>
       </li>
     </ul>
     <div class="tab-content">
@@ -20,7 +20,7 @@
            <%= f.text_field(:name, class: "text-field") %> 
           </h3>
           <div>
-            <%= f.text_area(:description, cols: 60, rows: 3, id: "qs-form")  %>
+            <%= f.text_area(:description, cols: 60, rows: 3, class: "qs-form")  %>
           </div>
           <div class="qs-messages">
             <p>This text editor supports markdown</p>
@@ -32,8 +32,8 @@
       </div>
       <div role="tabpanel" class="tab-pane" id="preview">
         <div class="well">
-          <h3 id="qs-title-preview" class="turquesa"></h3>
-          <div id="qs-text-preview">
+          <h3 class="qs-title-preview turquesa"></h3>
+          <div class="qs-text-preview">
           </div>
         </div>
       </div>

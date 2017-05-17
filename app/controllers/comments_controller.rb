@@ -17,7 +17,17 @@ class CommentsController < ApplicationController
       @comment = @question.comments.new(comment_params)
     end
     if @comment.save
-      redirect_to @question
+      if params.has_key?(:answer_id)
+        respond_to do |format|
+          format.js {render 'comments/createca.js.erb'}
+        end
+      else
+        respond_to do |format|
+          format.js {render 'comments/createcq.js.erb'}
+        end
+      end
+      
+      # redirect_to @question
     else
       @comment.created_at = Time.now
       @typeEntry = session[:passed_variable]

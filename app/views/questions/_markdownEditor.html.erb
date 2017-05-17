@@ -17,10 +17,10 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active">
-            <a href="#editor<%= type %>" aria-controls="editor<%= type %>" role="tab" data-toggle="tab" id="<%= letter %>-editor">Editor</a>
+            <a href="#editor<%= type %>" aria-controls="editor<%= type %>" role="tab" data-toggle="tab" class="<%= letter %>-editor">Editor</a>
           </li>
           <li role="presentation">
-            <a href="#preview<%= type %>" aria-controls="preview<%= type %>" role="tab" data-toggle="tab" id="<%= letter  %>-preview">Preview</a>
+            <a href="#preview<%= type %>" aria-controls="preview<%= type %>" role="tab" data-toggle="tab" class="<%= letter  %>-preview">Preview</a>
           </li>
         </ul>
         <!-- Tab panes -->
@@ -29,7 +29,7 @@
             <div class="well">
               <%= form_for [type_obj, type_obj_new], :remote => true do |f| %>
                 <div>
-                  <%= f.text_area(:description, cols: 60, rows: 3, id: "#{letter}-form")  %>
+                  <%= f.text_area(:description, cols: 60, rows: 3, class: "#{letter}-form")  %>
                 </div> 
                 <div class="<%= letter  %>-messages">
                   <p>This text editor supports markdown</p>
@@ -40,8 +40,8 @@
           </div>
           <div role="tabpanel" class="tab-pane" id="preview<%= type %>">
             <div class="well">
-              <h3 id="<%= letter %>-title-preview" class="turquesa"></h3>
-              <div id="<%= letter %>-text-preview">
+              <h3 class="<%= letter %>-title-preview turquesa"></h3>
+              <div class="<%= letter %>-text-preview">
               </div>
             </div>
           </div>
