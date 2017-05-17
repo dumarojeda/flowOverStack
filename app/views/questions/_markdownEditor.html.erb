@@ -5,7 +5,7 @@
       <% if type != "edit" %>
         <% clase = "collapse" %>
         <div>
-          <button id="create-answer" class="btn btn-primary <%= link  %>" type="button" data-toggle="collapse" data-target="#collapse<%= type %>" aria-expanded="false" aria-controls="collapse<%= type %>">
+          <button id="<%= letter %>-create" class="btn btn-primary <%= link  %>" type="button" data-toggle="collapse" data-target="#collapse<%= type %>" aria-expanded="false" aria-controls="collapse<%= type %>">
             Create <%= type_name %>
           </button>
         </div>
@@ -31,7 +31,7 @@
                 <div>
                   <%= f.text_area(:description, cols: 60, rows: 3, id: "#{letter}-form")  %>
                 </div> 
-                <div>
+                <div class="<%= letter  %>-messages">
                   <p>This text editor supports markdown</p>
                 </div>
                 <div><%= f.submit "Send  #{type_name} ", class: "btn btn-primary big-button" %></div>

@@ -16,7 +16,9 @@ class AnswersController < ApplicationController
         format.js
       end
     else
-      render "questions/show"
+      respond_to do |format|
+        format.js {render 'errors.js.erb'}
+      end
     end
   end
 

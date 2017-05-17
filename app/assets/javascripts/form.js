@@ -7,6 +7,11 @@ $(document).on('turbolinks:load', function() {
   bindEvents()
 })
 function bindEvents(){
+  // Eventos para escribir/editar una pregunta o respuesta o comentario en el editor o para previsualizarlo:
+  // qs = tipo escribir question
+  // an = tipo escribir answer
+  // ca = tipo escribir comentario a un answer
+  // cq = tipo escribir comentario a una question
   $("#qs-preview").off("click");
   $("#qs-editor").off("click");
   $("#qs-preview").on("click", previewEditor);
@@ -27,6 +32,15 @@ function bindEvents(){
   $("#cq-preview").on("click", previewEditor);
   $("#cq-editor").on("click", showEditor);
 
+  // Eventos para crear un nuevo comentario, pregunta o respuesta
+  $("#an-create").off("click");
+  $("#an-create").on("click", createText);
+
+  $("#ca-create").off("click");
+  $("#ca-create").on("click", createText);
+
+  $('#cq-create').off("click");
+  $('#cq-create').on("click", createText);
 
   console.log("an bind events")
 }
@@ -68,4 +82,20 @@ function previewEditor(typeEntry){
     }
   }).done("HECHO").fail()
   bindEvents()
+}
+
+function createText(){
+  event.preventDefault()
+  console.log(this)
+  var typeEntry = this.id.split("-")[0]
+  console.log(typeEntry)
+  var url = "/answers/typeEntry"
+  $.ajax({
+    url: url,
+    method: "GET",
+    data: {
+      typeEntry: typeEntry,
+    }
+  }).done("HECHO").fail()
+  bindEvents() 
 }
