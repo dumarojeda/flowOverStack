@@ -60,12 +60,14 @@ class CommentsController < ApplicationController
       @answer = Answer.find(params[:answer_id])
       @question_id = @answer.question.id
       @question = Question.find(@question_id)
-      @comment = @answer.comments.update(comment_params)
+      @comment = @answer.comments.find(params[:id])
+      @comment.update(comment_params)
       redirect_to question_path(@question_id)
     else
       @question_id = params[:question_id]
       @question = Question.find(@question_id)
-      @comment = @question.comments.update(comment_params)
+      @comment = @question.comments.find(params[:id])
+      @comment.update(comment_params)
       redirect_to question_path(@question_id)
     end
   end
@@ -83,7 +85,9 @@ class CommentsController < ApplicationController
       @comment = @question.comments.find(params[:id])
       @comment.destroy
     end
-    redirect_to @question
+    respond_to do |format|
+      format.js 
+    end
 
   end
 
