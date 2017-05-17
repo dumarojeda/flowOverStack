@@ -1,4 +1,4 @@
-
+<!-- muestra una answer -->
 <li class="answer row">
   <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
   <%= render :partial => "questions/votesQA", :locals => {:delete_vote => answer_vote_path(answer, answer.votes), :create_vote => answer_votes_path(answer), :qa => answer}  %>
@@ -24,13 +24,13 @@
       </p>
     </div>
     <div>
-      <!-- Muestra los comentarios de las answers -->
+      <!-- Muestra los comentarios de una answer -->
       <div class="container">
         <ul class="answer-<%= answer.id %>">
           <% if answer.comments.any?   %>
           
             <% answer.comments.each do |comment| %>
-              <%= render :partial => "comments/commentShowca", :locals => {:comment => comment, :@answer => answer}%> %>
+              <%= render :partial => "comments/commentShowca", :locals => {:comment => comment, :@answer => answer}%>
             <% end %>
           
           <% end %>
@@ -39,6 +39,6 @@
     </div>
   <!-- Boton para crear comentario a una answer  -->
   <div>
-  <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new, :link => "link", :letter => "ca" } %>
+  <%= render :partial => "answers/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new, :link => "link", :letter => "ca", :edit => "new" } %>
   </div>
   </li>

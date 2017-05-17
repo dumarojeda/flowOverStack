@@ -1,0 +1,1 @@
+$(".<%= j @typeEntry %>-text-preview-<%= j @answerId %>").html('<%= escape_javascript(render :html => raw(@markdown.render(@description))) %>')

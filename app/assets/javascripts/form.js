@@ -24,7 +24,7 @@ function bindEvents(){
 
   $(".ca-preview").off("click");
   $(".ca-editor").off("click");
-  $(".ca-preview").on("click", previewEditor);
+  $(".ca-preview").on("click", previewEditorAnswer);
   $(".ca-editor").on("click", showEditor);
 
   $(".cq-preview").off("click");
@@ -33,14 +33,14 @@ function bindEvents(){
   $(".cq-editor").on("click", showEditor);
 
   // Eventos para crear un nuevo comentario, pregunta o respuesta
-  $("#an-create").off("click");
-  $("#an-create").on("click", createText);
+  $(".an-create").off("click");
+  $(".an-create").on("click", createText);
 
-  $("#ca-create").off("click");
-  $("#ca-create").on("click", createText);
+  $(".ca-create").off("click");
+  $(".ca-create").on("click", createText);
 
-  $('#cq-create').off("click");
-  $('#cq-create').on("click", createText);
+  $('.cq-create').off("click");
+  $('.cq-create').on("click", createText);
 
   console.log("an bind events")
 }
@@ -83,10 +83,29 @@ function previewEditor(typeEntry){
   bindEvents()
 }
 
+function previewEditorAnswer(){
+  event.preventDefault()
+  var answerId = this.href.split("#")[1].split("w")[2]
+  console.log(this)
+  var typeEntry = this.className.split("-")[0]
+  var data = $("."+typeEntry+"-form-"+answerId).val()
+  var url = "/answers/preview"
+  $.ajax({
+    url: url,
+    method: "GET",
+    data: {
+      typeEntry: typeEntry,
+      answerId: answerId,
+      description: data
+    }
+  }).done("HECHO").fail()
+  bindEvents()
+}
+
 function createText(){
   event.preventDefault()
   console.log(this)
-  var typeEntry = this.id.split("-")[0]
+  var typeEntry = this.className.split("-")[0]
   console.log(typeEntry)
   var url = "/answers/typeEntry"
   $.ajax({
@@ -98,3 +117,4 @@ function createText(){
   }).done("HECHO").fail()
   bindEvents() 
 }
+

@@ -1,8 +1,8 @@
-  <!-- type: answer / comment -->
+<!-- Este parcial solo se usa en los comments de una answer, para crearlos o editarlos -->
   <div class="row">
     <% if user_signed_in? %>
-      <!-- <h4 class="turquesa">Enter your <%= type %></h4> -->
-      <% if type != "edit" %>
+      <!-- si el usuario va a editar el comentario se muestra abierto osea sin la clase collapse de bootstrap -->
+      <% if edit != "edit" %>
         <% clase = "collapse" %>
         <div>
           <button class="<%= letter %>-create btn btn-primary <%= link  %>" type="button" data-toggle="collapse" data-target="#collapse<%= type %>" aria-expanded="false" aria-controls="collapse<%= type %>">
@@ -29,7 +29,7 @@
             <div class="well">
               <%= form_for [type_obj, type_obj_new], :remote => true do |f| %>
                 <div>
-                  <%= f.text_area(:description, cols: 60, rows: 3, class: "#{letter}-form")  %>
+                  <%= f.text_area(:description, cols: 60, rows: 3, class: "#{letter}-form-#{type_obj.id}")  %>
                 </div> 
                 <div class="<%= letter  %>-messages">
                   <p>This text editor supports markdown</p>
@@ -41,7 +41,7 @@
           <div role="tabpanel" class="tab-pane" id="preview<%= type %>">
             <div class="well">
               <h3 class="<%= letter %>-title-preview turquesa"></h3>
-              <div class="<%= letter %>-text-preview">
+              <div class="<%= letter %>-text-preview-<%= type_obj.id %>">
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 class AnswersController < ApplicationController
   require 'redcarpet/render_strip'
-  before_action :set_markdowm, only: [:create, :show, :edit, :new]
+  before_action :set_markdowm, only: [:create, :show, :edit, :new, :preview]
 
   
   def new
@@ -27,6 +27,20 @@ class AnswersController < ApplicationController
   def typeEntry
     @typeEntry = params[:typeEntry]
     session[:passed_variable] = @typeEntry
+  end
+
+  def preview
+    @typeEntry = params[:typeEntry]
+    @answerId = params[:answerId]
+    if params[:description].present?
+      @description = params[:description]
+    else
+      @description = ''
+    end
+    respond_to do |format|
+      #format.html
+      format.js {render "answers/preview.js.erb"}
+    end
   end
 
   def edit 

@@ -1,6 +1,6 @@
 
 <% if @answer %>
-  <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "edit", :type_obj => @answer, :type_obj_new => @comment, :link => "btn-lg big-button", :letter => "ca" } %>
+  <%= render :partial => "answers/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{@answer.id}", :type_obj => @answer, :type_obj_new => @comment, :link => "btn-lg big-button", :letter => "ca", :edit => "edit" } %>
 <% else %>
-  <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "edit", :type_obj => @question, :type_obj_new => @comment, :link => "btn-lg big-button", :letter => "ca" } %>
+  <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "edit", :type_obj => @question, :type_obj_new => @comment, :link => "btn-lg big-button", :letter => "cq" } %>
 <% end %>
