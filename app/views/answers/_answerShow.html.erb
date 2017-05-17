@@ -53,23 +53,6 @@
     </div>
   <!-- Boton para crear comentario a una answer  -->
   <div>
-    <% if @comment && @comment.c_duty_type == "Answer" %>
-      <% if @answer.id == answer.id %>
-        <% if @comment.errors.any? %>    
-          <div id="error_explanation">
-            <h2>
-              <%= pluralize(@comment.errors.count, "error") %> 
-              prohibited this comment from being saved:
-            </h2>
-            <ul>
-              <% @comment.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-      <% end %>
-    <% end %>
   <%= render :partial => "questions/markdownEditor", :locals => {:type_name => "Comment", :type => "new#{answer.id}", :type_obj => answer, :type_obj_new => answer.comments.new, :link => "link", :letter => "ca" } %>
   </div>
   </li>
