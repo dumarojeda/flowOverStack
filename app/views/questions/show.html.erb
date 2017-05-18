@@ -3,6 +3,7 @@
   <!-- Question -->
   <div class="row">
     <div class="col-md-2 col-lg-2 col-sm-2 col-xs-1">
+    <!-- votos para las questions -->
       <%= render :partial => "questions/votesQA", :locals => {:delete_vote => question_vote_path(@question, @question.votes), :create_vote => question_votes_path(@question), :qa => @question} %>
     </div>
     <div class="col-md-10 col-lg-10 col-sm-10 col-xs-11">

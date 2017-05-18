@@ -1,17 +1,22 @@
 <% if user_signed_in? %>
+    <!-- evaluar si el usuario ya realizo un voto  -->
     <% if qa.votes.pluck(:user_id).include?(current_user.id)  %>
       <div class="center">
+      <!-- se pinta de naranja -->
         <span class="glyphicon glyphicon-chevron-up stack"  aria-hidden="true"></span>
         <span><%= qa.votes.size  %></span>
-        <%= link_to delete_vote, method: :delete do %>
+        <!-- se habilita boton para eliminar voto -->
+        <%= link_to delete_vote, method: :delete, remote: true do %>
           <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
         <% end %>
       </div>
     <% else %>
       <div class="center">
-        <%= link_to create_vote, method: :post do %>
+      <!-- como el usuario no ha votado se le permite hacerlo -->
+        <%= link_to create_vote, method: :post, remote: true do %>
           <span class="glyphicon glyphicon-chevron-up"  aria-hidden="true"></span>
         <% end  %>
+        <!-- boton para eliminar voto desactivado -->
         <span><%= qa.votes.size  %></span>
         <span class="glyphicon glyphicon-chevron-down"  aria-hidden="true"></span>
       </div>
